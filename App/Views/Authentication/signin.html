@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+
+{% block body %}
+
+    <section>
+        <div id="agileits-sign-in-page" class="sign-in-wrapper">
+            <div class="agileinfo_signin">
+                <h3>Login</h3>
+                <form action="/login" method="post">
+                    <input type="text" name="credential" placeholder="E-Mail oder Nutzername" required="">
+                    <input type="password" name="password" placeholder="Passwort" required="">
+                    <input type="submit" value="Sign In">
+                </form>
+                <h6> Noch kein Mitglied? <a href="/signup">Jetzt registrieren</a> </h6>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

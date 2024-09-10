@@ -1,0 +1,13 @@
+{
+    "require": {
+        "twig/twig": "~1.0",
+        "ext-gmagick": "*",
+        "ext-gd": "*"
+    },
+    "autoload": {
+        "psr-4": {
+             "Core\\": "Core/",
+             "App\\": "App/"
+        }
+    }
+}

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/bootstrap-select.js"></script>
+    <script src="/js/jquery-1.10.2.js"></script>
+    <link rel="stylesheet" href="/css/flexslider.css" media="screen" /><!-- flexslider css -->
+
+
+{% endblock %}
+
+{% block body %}
+
+    <!-- breadcrumbs -->
+    <div class="w3layouts-breadcrumbs text-center">
+        <div class="container">
+                <span class="agile-breadcrumbs">
+                <a href="/"><i class="fa fa-home home_1"></i></a> /
+                <a href="/category">Kategorien</a> /
+                <a href="/category/{{ post.category.id }}">{{ post.category.name }}</a> /
+                <span> {{ post.title }}</span></span>
+        </div>
+    </div>
+    <!-- //breadcrumbs -->
+    <!--single-page-->
+    <div class="single-page main-grid-border">
+        <div class="container">
+            <div class="product-desc">
+                <div class="col-md-7 product-view">
+                    <h2>{{ post.title }}</h2>
+                    <p> <i class="glyphicon glyphicon-user"></i><a href="#">{{ post.user.username }}</a>, <a href="#">{{ post.user.city }}</a>| Hinzugefügt am {{ post.created }}, Anzeige ID: {{ post.id }}</p>
+                    <div class="flexslider">
+                        <ul class="slides">
+                            {% for image in post.images %}
+                                <li data-thumb="/uploads/{{ image.path }}">
+                                    <img src="/uploads/{{ image.path }}" />
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <!-- FlexSlider -->
+                    <script defer src="/js/jquery.flexslider.js"></script>
+
+                    <script>
+                        // Can also be used with $(document).ready()
+                        $(window).load(function() {
+                            $('.flexslider').flexslider({
+                                animation: "slide",
+                                controlNav: "thumbnails"
+                            });
+                        });
+                    </script>
+                    <!-- //FlexSlider -->
+                    <div class="product-details">
+                        <h4><span class="w3layouts-agileinfo">Kategorie</span>: <a href="#">{{ post.category.name }}</a><div class="clearfix"></div></h4>
+                        <h4><span class="w3layouts-agileinfo">Beschreibung</span>:<p>{{ post.description }}</p><div class="clearfix"></div></h4>
+
+                    </div>
+                </div>
+                <div class="col-md-5 product-details-grid">
+                    <div class="item-price">
+                        {% if post.pricing_base != "free" %}
+                            <div class="product-price">
+                                <p class="p-price">Preis</p>
+                                <h3 class="rate">€ {{ post.price }}</h3>
+                                <div class="clearfix"></div>
+                            </div>
+                        {% endif %}
+                        <div class="condition">
+                            <p class="p-price">Basis</p>
+                            {% if post.pricing_base == "negotiable" %}
+                                <h4>Verhandlungsbasis</h4>
+                            {% elseif post.pricing_base == "free" %}
+                                <h4>Zu verschenken</h4>
+                            {% else %}
+                                <h4>Fixpreis</h4>
+                            {% endif %}
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="itemtype">
+                            <p class="p-price">Kategorie</p>
+                            <h4>{{ post.category.name }}</h4>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="interested text-center">
+                        <h4>Sie sind in die Anzeige interessiert?</h4>
+                        <small>Kontaktiere den Verkäufer!</small>
+                        <p><i class="glyphicon glyphicon-earphone"></i>{{ post.user.mobile_number }}</p>
+                        <p><i class="glyphicon glyphicon-inbox"></i>{{ post.user.email }}</p>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <!--//single-page-->
+
+
+
+
+{% endblock %}
+
+
+{% block script %}
+
+
+{% endblock %}

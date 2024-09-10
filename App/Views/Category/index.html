@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+
+
+
+<div class="w3layouts-breadcrumbs text-center">
+    <div class="container">
+                <span class="agile-breadcrumbs">
+                <a href="/"><i class="fa fa-home home_1"></i></a> /
+                <a href="/category">Kategorien</a> /
+                <span>{{ category.name }}</span></span>
+    </div>
+</div>
+
+<div class="total-ads main-grid-border">
+    <div class="container">
+        <div class="select-box">
+            <div class="search-product ads-list">
+                <label>Suche nach einem Produkt</label>
+                <div class="search">
+                    {% if category.name == "Alle" %}
+                        <form action="/post/search" method="post">
+                    {% else %}
+                        <form action="/category/{{ category.id }}/search" method="post">
+                    {% endif %}
+                    <div id="custom-search-input">
+                        <div class="input-group">
+                            <input name="searchText" type="text" class="form-control input-lg" placeholder="z.B. Macbook" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-info btn-lg" type="submit">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    </form>
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="all-categories">
+            <h3> Wähle eine Kategorie um die richtige Anzeige zu finden</h3>
+            <ul class="all-cat-list">
+                {% for cat in categories %}
+                    {% if category.id == cat.id %}
+                        <li><b><a href="/category/{{ cat.id }}"><b>{{ cat.name }} </b><span class="num-of-ads"> ({{ cat.numberOfAds }})</span></a></b></li>
+                    {% else %}
+                        <li><a href="/category/{{ cat.id }}">{{ cat.name }} <span class="num-of-ads"> ({{ cat.numberOfAds }})</span></a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="ads-grid">
+            <div class="agileinfo-ads-display col-md-12">
+                <div class="wrapper">
+                    <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                        <ul id="myTab" class="nav nav-tabs nav-tabs-responsive" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">
+                                    <span class="text">Anzeigen</span>
+                                </a>
+                        </ul>
+                        <div id="myTabContent" class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
+                                <div>
+                                    <div id="container">
+                                        {% if posts|length > 0 %}
+                                            {% for post in posts %}
+                                                <ul class="list">
+                                                    <a href="/post/{{ post.id }}">
+                                                        <li>
+
+                                                            <img src="/uploads/{{ post.images[0].path }}" title="" alt="Kein Bild gefunden" />
+                                                            <section class="list-left">
+                                                                <h5 class="title">{{ post.title }}</h5>
+                                                                <p class="catpath">{{ post.description }}</p>
+                                                            </section>
+                                                            <section class="list-right">
+                                                                <span class="date">{{ post.created }}</span>
+                                                                {% if post.pricing_base == "negotiable" %}
+                                                                    <span class="adprice">{{ post.price }} € VH</span>
+                                                                {% elseif post.pricing_base == "free" %}
+                                                                    <span class="adprice">Zu verschenken</span>
+                                                                {% else %}
+                                                                    <span class="adprice">{{ post.price }} €</span>
+                                                                {% endif %}
+                                                            </section>
+                                                            <div class="clearfix"></div>
+                                                        </li>
+                                                    </a>
+                                                </ul>
+                                            {% endfor %}
+                                        {% else %}
+                                            <p>Keine Anzeigen vorhanden</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+{% block script %}
+
+{% endblock %}

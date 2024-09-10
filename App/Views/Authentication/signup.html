@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+    <section>
+        <div id="agileits-sign-in-page" class="sign-in-wrapper">
+            <div class="agileinfo_signin">
+                <h3>Registrieren</h3>
+                <form action="/register" method="post" onsubmit="return checkPassword()">
+                    <input type="text" name="name" placeholder="Name" required="">
+                    <input type="text" name="firstname" placeholder="Vorname" required="">
+                    <input type="text" name="username" placeholder="Username" required="">
+                    <input type="email" name="email" placeholder="E-Mail" required="">
+                    <input type="text" name="city" placeholder="Stadt" required="">
+                    <input type="text" name="plz" placeholder="Postleitzahl" required="">
+                    <input type="text" name="country" placeholder="Land" required="">
+                    <input type="text" name="street" placeholder="Straße" required="">
+                    <input type="tel" name="mobile_number" placeholder="Mobilnummer" required="">
+                    <input id="password" type="password" name="password" placeholder="Password" required="">
+                    <input id="confirmPassword" type="password" name="confirmPassword" placeholder="Passwort erneut eingeben" required="">
+                    <div class="signin-rit">
+                        <span class="agree-checkbox">
+                            <label class="checkbox"><input id="checkbox" type="checkbox" name="checkbox">Ich akzeptiere die <a class="w3layouts-t" href="#" target="_blank">Nutzungsbedingungen</a> und <a class="w3layouts-t" href="privacy.html" target="_blank">die Datenschutzerklärung</a></label>
+                        </span>
+                    </div>
+                    <input type="submit" value="Registrieren">
+                </form>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+
+{% block script %}
+
+<script>
+    function checkPassword() {
+        var pass1 = document.getElementById("password").value;
+        var pass2 = document.getElementById("confirmPassword").value;
+        var checkbox = document.getElementById("checkbox");
+        var ok = true;
+        if (pass1 != pass2) {
+            alert("Die Passwörter stimmen nicht überein!");
+            document.getElementById("password").style.borderColor = "#E34234";
+            document.getElementById("confirmPassword").style.borderColor = "#E34234";
+            ok = false;
+        } else if (checkbox.checked == false) {
+            alert("Bitte akzeptiere unsere Nutzungsbedingungen!");
+            ok = false
+        }
+
+        return ok;
+    }
+</script>
+
+{% endblock %}

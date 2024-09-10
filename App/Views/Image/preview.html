@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block head %}
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/js/bootstrap.js"></script>
+<script src="/js/bootstrap-select.js"></script>
+<link rel="stylesheet" href="/css/flexslider.css" media="screen" /><!-- flexslider css -->
+
+{% endblock %}
+
+{% block body %}
+
+<!-- breadcrumbs -->
+<div class="w3layouts-breadcrumbs text-center">
+    <div class="container">
+                <span class="agile-breadcrumbs">
+                <a href="/"><i class="fa fa-home home_1"></i></a> /
+                <a href="/category">Bildbearbeitung</a> /
+                <a href="/category/{{ post.category.id }}">GraphicsMagick</a> /
+                <span> </span></span>
+    </div>
+</div>
+
+
+<img src="/uploads/{{ imagepath }}"/>
+
+{% endblock %}
+
+
+{% block script %}
+
+
+{% endblock %}
+
+
+

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+    <div class="slider">
+        <ul class="rslides" id="slider">
+            <li>
+                <div class="w3ls-slide-text">
+                    <h3>Verkaufe und Finde in deiner Nähe!</h3>
+                </div>
+            </li>
+            <li>
+                <div class="w3ls-slide-text">
+                    <h3>Finde die besten Angebote hier</h3>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <div class="w3-categories">
+            <h3>Kategorien</h3>
+            <div class="container">
+
+                {% for category in categories %}
+
+                    <div class="col-md-3">
+                        <div class="focus-grid w3layouts-boder{{ category.border }}">
+                            <a class="btn-8" href="/category/{{ category.id }}">
+                                <div class="focus-border">
+                                    <div class="focus-layout">
+                                        <div class="focus-image "><i class='{{ category.icon }}'></i></div>
+                                        <h4 class="clrchg">{{ category.name }}</h4>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
